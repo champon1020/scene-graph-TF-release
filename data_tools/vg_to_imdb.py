@@ -39,7 +39,7 @@ def add_images(im_data, h5_file, args):
         basename =  str(img['image_id']) + '.jpg'
         if basename in corrupted_ims:
             continue
-            
+
         filename = os.path.join(args.image_dir, basename)
         if os.path.exists(filename):
             fns.append(filename)

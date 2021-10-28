@@ -6,3 +6,4 @@ pyyaml
 easydict
 graphviz
 cython
+pillow

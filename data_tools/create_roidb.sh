@@ -10,7 +10,7 @@ N_REL=50 # number of relationship categories
 H5=VG-SGG.h5
 JSON=VG-SGG-dicts.json
 FRAC=1
-IMDB=imdb_1024.h5
+IMDB=imdb_512.h5
 
 python vg_to_roidb.py \
     --imdb $IMDB \
