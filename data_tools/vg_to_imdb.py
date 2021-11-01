@@ -54,7 +54,8 @@ def add_images(im_data, h5_file, args):
     num_images = len(fns)
 
     shape = (num_images, 3, args.image_size, args.image_size)
-    image_dset = h5_file.create_dataset('images', shape, dtype=np.uint8)
+
+    #image_dset = h5_file.create_dataset('images', shape, dtype=np.uint8)
     original_heights = np.zeros(num_images, dtype=np.int32)
     original_widths = np.zeros(num_images, dtype=np.int32)
     image_heights = np.zeros(num_images, dtype=np.int32)
@@ -78,17 +79,22 @@ def add_images(im_data, h5_file, args):
             H0, W0 = img.shape[0], img.shape[1]
             img = imresize(img, float(args.image_size) / max(H0, W0))
             H, W = img.shape[0], img.shape[1]
+            """
             # swap rgb to bgr. This can't be the best way right? #fail
             r = img[:,:,0].copy()
             img[:,:,0] = img[:,:,2]
             img[:,:,2] = r
+            """
 
+            # use original image
             lock.acquire()
             original_heights[i] = H0
             original_widths[i] = W0
             image_heights[i] = H
             image_widths[i] = W
+            """
             image_dset[i, :, :H, :W] = img.transpose(2, 0, 1)
+            """
             lock.release()
             q.task_done()
 
